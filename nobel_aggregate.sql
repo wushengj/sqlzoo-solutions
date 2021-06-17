@@ -98,3 +98,6 @@ WHERE yr >= 2000
 GROUP BY yr,
     subject
 HAVING COUNT(winner) = 3 ;
+
+-- Quiz
+-- CADEB EDD

@@ -130,7 +130,6 @@ WHERE (
 GROUP BY matchid,
     mdate;
 
---unsure
 -- 12
 -- For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
 SELECT matchid,
@@ -168,3 +167,25 @@ ORDER BY mdate,
     matchid,
     team1,
     team2;
+
+/*
+The following query may seem correct, 
+SELECT mdate, team1, SUM(subscore1) AS score1, team2, SUM(subscore2) AS score2
+FROM (SELECT mdate,matchid, 
+  team1,
+  CASE WHEN teamid=team1 THEN 1 ELSE 0 END subscore1,
+  team2,
+  CASE WHEN teamid=team2 THEN 1 ELSE 0 END subscore2
+  FROM game JOIN goal ON matchid = id) matchgoal
+GROUP BY mdate, team1, team2
+ORDER BY mdate, matchid, team1, team2
+
+but it ignores cases that both team got 0 goal.
+mdate	team1	score1	team2	score2
+24 June 2012	ENG	0	ITA	0
+27 June 2012	POR	0	ESP	0
+
+*/
+
+-- Quiz
+-- DCAAB CB
